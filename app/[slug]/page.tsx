@@ -1,5 +1,6 @@
-import { getArticle } from "@/lib/articles";
 import Link from "next/link";
+import { getArticle } from "@/lib/articles";
+import Markdown from "markdown-to-jsx";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 const ArticleDetails = async ({ params }: { params: { slug: string } }) => {
@@ -13,10 +14,7 @@ const ArticleDetails = async ({ params }: { params: { slug: string } }) => {
           <p>back to home</p>
         </Link>
       </div>
-      <article
-        className="article"
-        dangerouslySetInnerHTML={{ __html: content || "" }}
-      />
+      <Markdown className="article">{content || ""}</Markdown>
     </section>
   );
 };
