@@ -1,5 +1,5 @@
 ---
-title: "How to something"
+title: "Whom to"
 category: "logics"
 date: "06-04-2023"
 ---

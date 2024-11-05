@@ -9,6 +9,20 @@ import { Article } from "@/types";
 
 const articlesDirectory = path.join(process.cwd(), "articles");
 
+const getCategorizedArticles = async (): Promise<Record<string, Article[]>> => {
+  const articles = await getArticles();
+  const categorizedArticles: Record<string, Article[]> = {};
+
+  articles.forEach((article) => {
+    if (!categorizedArticles[article.category]) {
+      categorizedArticles[article.category] = [];
+    }
+    categorizedArticles[article.category].push(article);
+  });
+
+  return categorizedArticles;
+};
+
 const getArticles = async (): Promise<Article[]> => {
   const fileNames = fs.readdirSync(articlesDirectory);
   const articles = await Promise.all(
@@ -30,20 +44,6 @@ const getArticles = async (): Promise<Article[]> => {
   );
 
   return articles;
-};
-
-const getCategorizedArticles = async (): Promise<Record<string, Article[]>> => {
-  const articles = await getArticles();
-  const categorizedArticles: Record<string, Article[]> = {};
-
-  articles.forEach((article) => {
-    if (!categorizedArticles[article.category]) {
-      categorizedArticles[article.category] = [];
-    }
-    categorizedArticles[article.category].push(article);
-  });
-
-  return categorizedArticles;
 };
 
 const getArticle = async (id: string): Promise<Article> => {

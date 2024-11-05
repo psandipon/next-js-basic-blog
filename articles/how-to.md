@@ -1,5 +1,5 @@
 ---
-title: "How to something"
+title: "How to"
 category: "thoughts"
 date: "06-04-2023"
 ---

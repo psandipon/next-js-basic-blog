@@ -1,9 +1,21 @@
 import Link from "next/link";
-import { getArticle } from "@/lib/articles";
 import Markdown from "markdown-to-jsx";
+import { getArticle } from "@/lib/articles";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
-const ArticleDetails = async ({ params }: { params: { slug: string } }) => {
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const { title } = await getArticle(slug);
+  return {
+    title,
+  };
+}
+
+const ArticleDetails = async ({ params }: PageProps) => {
   const { slug } = await params;
   const { content } = await getArticle(slug);
   return (
